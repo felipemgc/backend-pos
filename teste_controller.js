@@ -3,13 +3,15 @@ const db = require('./db_helper')
 const request = require('request')
 const mtg = require('mtgsdk')
 
-controller.get('/card:name', (req, res) => {
-    mtg.card.where({name: req.params.name})
-        .then(results => {
-            console.log(results)
-        })
+// mtg.card.where({name: 'Archangel Avacyn'})
+    //         .then(results => {
+    //             console.log(results)
+    //         });
+
+controller.get('/card/:name', (req, res) => {
+    var data = db.fetchByCardName('magic',req.params.name);
     
-    
+    res.send(data);
 })
 
 controller.post('/characters', (req, res) => {
@@ -34,7 +36,7 @@ controller.get('/cards', (req, res) => {
 
         res.send(data)
 
-        db.save('cards', JSON.parse(data))
+        db.save('magic', JSON.parse(data))
     })
 })
 
