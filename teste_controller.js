@@ -1,9 +1,15 @@
 const controller = require('express').Router()
 const db = require('./db_helper')
 const request = require('request')
+const mtg = require('mtgsdk')
 
-controller.get('/characters', (req, res) => {
-    res.send(db.fetch('characters'))
+controller.get('/card:name', (req, res) => {
+    mtg.card.where({name: req.params.name})
+        .then(results => {
+            console.log(results)
+        })
+    
+    
 })
 
 controller.post('/characters', (req, res) => {
