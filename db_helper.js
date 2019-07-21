@@ -9,19 +9,20 @@ db.defaults({magic: []}).write()
 let fetch = (schema)=>{
     return db.get(schema).value()
 }
+function getCartas(){
+    return db.get('magic').value()[0].cards;
+}
 
 let fetchByCardName = (schema, name)=>{
-    var cards = db.get('magic').value()[0].cards
-    var nomeCarta; 
-    var carta;
+    var cards = getCartas();
 
-    cards.forEach(card => {
-        if(name == card.name){
-            carta = card;
-        }
-    });
-    
-    return  carta;
+    var i;
+    for (i = 0; i < cards.length; i++) { 
+        if(cards[i].name.match(name))
+            return cards[i];
+    }
+        
+    return "erro";
     
 }
 
