@@ -1,12 +1,13 @@
 const controller = require('express').Router()
 const db = require('./db_helper')
 const request = require('request')
-const mtg = require('mtgsdk')
 
-// mtg.card.where({name: 'Archangel Avacyn'})
-    //         .then(results => {
-    //             console.log(results)
-    //         });
+
+controller.get('/allCards', (req, res) => {
+    var data = db.fetchAllCards('magic');
+    
+    res.send(data);
+})
 
 controller.get('/card/:name', (req, res) => {
     var data = db.fetchByCardName('magic',req.params.name);
@@ -14,19 +15,15 @@ controller.get('/card/:name', (req, res) => {
     res.send(data);
 })
 
-controller.post('/characters', (req, res) => {
-    res.send(db.save('characters', req.body))
+controller.get('/cardText/:name', (req, res) => {
+    var data = db.fetchByCardText('magic',req.params.name);
+    
+    
+    res.send(data);
 })
 
-controller.put('/characters', (req, res) => {
-
-})
-
-controller.delete('/characters', (req, res) => {
-
-})
 //http://localhost:5000/api/cards
-//pega todas as cartas do jogo
+//pega cartas as cartas do jogo via api. o primeiro comando a ser executado para popular o banco
 controller.get('/cards', (req, res) => {
     request.get({
         url: 'https://api.magicthegathering.io/v1/cards'

@@ -13,6 +13,13 @@ function getCartas(){
     return db.get('magic').value()[0].cards;
 }
 
+let fetchAllCards = (schema, name)=>{
+    var cards = getCartas();
+        
+    return cards;
+    
+}
+
 let fetchByCardName = (schema, name)=>{
     var cards = getCartas();
 
@@ -26,6 +33,21 @@ let fetchByCardName = (schema, name)=>{
     
 }
 
+let fetchByCardText = (schema, text)=>{
+    var cards = getCartas();
+
+    var arrayCards = [];
+    var i;
+    for (i = 0; i < cards.length; i++) { 
+        if(cards[i].text && cards[i].text.toString().includes(text))
+            arrayCards.push(cards);
+        
+    }
+      
+    return arrayCards;
+    
+}
+
 let save = (schema, value)=>{
     return db.get(schema).push(value).write()
 }
@@ -35,6 +57,6 @@ let fetchByCharacterName = (schema, name)=>{
 }
 
 
-module.exports = {fetch, fetchByCardName, save}
+module.exports = {fetch, fetchByCardName, fetchByCardText, fetchAllCards, save}
 
 
