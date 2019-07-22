@@ -4,7 +4,8 @@ const fileSync = require('lowdb/adapters/FileSync')
 const adapter = new fileSync('db.json')
 const db = lowDB(adapter)
 
-db.defaults({magic: []}).write()
+
+db.defaults({magic: [], magicDump:[]}).write()
 
 let fetch = (schema)=>{
     return db.get(schema).value()
