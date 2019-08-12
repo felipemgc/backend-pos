@@ -74,6 +74,6 @@ let fetchByCharacterName = (schema, name)=>{
 }
 
 
-module.exports = {fetch, fetchByCardName, fetchByCardText, fetchAllCards, save}
+module.exports = {fetch, fetchByCardName, fetchByCardText, fetchAllCards, fetchByCardId, save}
 
 

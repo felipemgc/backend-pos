@@ -35,22 +35,9 @@ controller.get('/cardText/:name', (req, res) => {
 })
 
 
-
-
-// //fetch card by name and language
-// controller.get('/get-card-name-language', (req, res) => {
-
-//     var aux;
-//     mtg.card.where({ name: 'Arcángel Avacyn', language: 'spanish' })
-//         .then(results => {
-//             console.log(results)
-//             res.send((results));
-//         })
-// })
-
 //fetch card by name and language
+//Ex: https://backend-magic.herokuapp.com/api/get-card-name/Arc%C3%A1ngel%20Avacyn/language/spanish
 controller.get('/get-card-name/:name/language/:language', (req, res) => {
-
     var aux;
     mtg.card.where({ name: req.params.name , language: req.params.language })
         .then(results => {
@@ -83,16 +70,16 @@ controller.get('/searchID/:id', (req, res) => {
     // return
 })
 
-//several filters using the external api
-controller.get('/testeBuscaMtg', (req, res) => {
-    var cartas = []
-    mtg.card.all({ supertypes: 'legendary', types: 'creature', colors: 'red,white' })
-        .on('data', function (card) {
-            console.log(card.name)
+// //several filters using the external api
+// controller.get('/testeBuscaMtg', (req, res) => {
+//     var cartas = []
+//     mtg.card.all({ supertypes: 'legendary', types: 'creature', colors: 'red,white' })
+//         .on('data', function (card) {
+//             console.log(card.name)
 
-        });
+//         });
 
-})
+// })
 
 
 //This function is used to load the local bank with the information from the API cards.
