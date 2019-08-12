@@ -15,31 +15,31 @@ controller.get('/cards', (req, res) => {
     })
 })
 
-//returns all cards that have been saved in the database
-controller.get('/allCards', (req, res) => {
+//returns all cards that have been saved in the database //OK
+controller.get('/all-cards', (req, res) => {
     var data = db.fetchAllCards('magic');
     res.send(data);
 })
 
-//fetch card by name (title of the card)
-controller.get('/card/:name', (req, res) => {
+//fetch card by name (title of the card)    //OK
+controller.get('/card-name/:name', (req, res) => {
     var data = db.fetchByCardName('magic', req.params.name);
     res.send(data);
 })
 
 
-//fetch card by text (text in the description of the card)
-controller.get('/cardText/:name', (req, res) => {
+//fetch card by text (text in the description of the card) //ERRO
+controller.get('/card-text/:name', (req, res) => {
     var data = db.fetchByCardText('magic', req.params.name);
     res.send(data);
 })
 
 
-//fetch card by name and language
+//fetch card by name and language   //OK
 //Ex: https://backend-magic.herokuapp.com/api/get-card-name/Arc%C3%A1ngel%20Avacyn/language/spanish
 controller.get('/get-card-name/:name/language/:language', (req, res) => {
     var aux;
-    mtg.card.where({ name: req.params.name , language: req.params.language })
+    mtg.card.where({ name: req.params.name, language: req.params.language })
         .then(results => {
             console.log(results)
             res.send((results));
@@ -47,7 +47,7 @@ controller.get('/get-card-name/:name/language/:language', (req, res) => {
 })
 
 
-//get the cards to set up a listview by passing the pagination (int value)
+//get the cards to set up a listview by passing the pagination (int value)   //OK
 controller.get('/listview/:page', (req, res) => {
     mtg.card.where({ page: req.params.page, pageSize: 50 })
         .then(cards => {
@@ -57,8 +57,8 @@ controller.get('/listview/:page', (req, res) => {
 })
 
 
-//search card by id
-controller.get('/searchID/:id', (req, res) => {
+//search card by id  //BROKEN
+controller.get('/search-id/:id', (req, res) => {
 
     var data = db.fetchByCardId('magic', req.params.id);
     res.send(data);
