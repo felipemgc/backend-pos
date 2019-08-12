@@ -10,19 +10,19 @@ db.defaults({magic: [], magicDump:[]}).write()
 let fetch = (schema)=>{
     return db.get(schema).value()
 }
-function getCartas(){
+function getCards(){
     return db.get('magic').value()[0].cards;
 }
 
 let fetchAllCards = (schema, name)=>{
-    var cards = getCartas();
+    var cards = getCards();
         
     return cards;
     
 }
 
 let fetchByCardName = (schema, name)=>{
-    var cards = getCartas();
+    var cards = getCards();
 
     var i;
     for (i = 0; i < cards.length; i++) { 
@@ -34,8 +34,24 @@ let fetchByCardName = (schema, name)=>{
     
 }
 
+let fetchByCardId = (schema, id)=>{
+    var cards = getCards();
+
+    var i;
+    for (i = 0; i < cards.length; i++) { 
+        if(cards[i].multiverseid.match(id))
+            return cards[i];
+    }
+        
+    return "erro";
+    
+}
+
+
+
+
 let fetchByCardText = (schema, text)=>{
-    var cards = getCartas();
+    var cards = getCards();
 
     var arrayCards = [];
     var i;
