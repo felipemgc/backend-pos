@@ -28,7 +28,7 @@ controller.get('/card-name/:name', (req, res) => {
 })
 
 
-//fetch card by text (text in the description of the card) //ERRO
+//fetch card by text (text in the description of the card) //CORRIGIDO
 controller.get('/card-text/:name', (req, res) => {
     var data = db.fetchByCardText('magic', req.params.name);
     res.send(data);

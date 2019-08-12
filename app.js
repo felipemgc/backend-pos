@@ -6,7 +6,7 @@ var app = express()
 
 app.use(bodyParser.json())
 
-app.use('/api', require('./teste_controller'))
+app.use('/api', require('./card_controller'))
 
 app.listen(process.env.PORT, () => {
     console.log(`Escutando na porta ${process.env.PORT}...`)

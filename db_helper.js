@@ -37,7 +37,8 @@ let fetchByCardId = (schema, id) => {
 
     var i;
     for (i = 0; i < cards.length; i++) {
-        if (cards[i].multiverseid.match(id.toString))
+      //  if (cards[i].multiverseid.match(id.toString()))
+        if (cards[i].multiverseid.toString().includes(id.toString()))
             return cards[i];
     }
     return "erro";
