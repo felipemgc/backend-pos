@@ -15,27 +15,27 @@ controller.get('/cards', (req, res) => {
     })
 })
 
-//returns all cards that have been saved in the database //OK
+//returns all cards that have been saved in the database
 controller.get('/all-cards', (req, res) => {
     var data = db.fetchAllCards('magic');
     res.send(data);
 })
 
-//fetch card by name (title of the card)    //OK
+//fetch card by name (title of the card)  
 controller.get('/card-name/:name', (req, res) => {
     var data = db.fetchByCardName('magic', req.params.name);
     res.send(data);
 })
 
 
-//fetch card by text (text in the description of the card) //CORRIGIDO
+//fetch card by text (text in the description of the card) 
 controller.get('/card-text/:name', (req, res) => {
     var data = db.fetchByCardText('magic', req.params.name);
     res.send(data);
 })
 
 
-//fetch card by name and language   //OK
+//fetch card by name and language  
 //Ex: https://backend-magic.herokuapp.com/api/get-card-name/Arc%C3%A1ngel%20Avacyn/language/spanish
 controller.get('/get-card-name/:name/language/:language', (req, res) => {
     var aux;
@@ -47,7 +47,7 @@ controller.get('/get-card-name/:name/language/:language', (req, res) => {
 })
 
 
-//get the cards to set up a listview by passing the pagination (int value)   //OK
+//get the cards to set up a listview by passing the pagination (int value) 
 controller.get('/listview/:page', (req, res) => {
     mtg.card.where({ page: req.params.page, pageSize: 50 })
         .then(cards => {
@@ -57,32 +57,16 @@ controller.get('/listview/:page', (req, res) => {
 })
 
 
-//search card by id  //BROKEN
+//search card by id (multiverseid)
+//Ex:  https://backend-magic.herokuapp.com/api/search-id/130483
 controller.get('/search-id/:id', (req, res) => {
 
     var data = db.fetchByCardId('magic', req.params.id);
     res.send(data);
 
-    // mtg.card.find(386616)
-    //     .then(result => {
-    //         console.log(result.card)
-    //     })
-    // return
 })
 
-// //several filters using the external api
-// controller.get('/testeBuscaMtg', (req, res) => {
-//     var cartas = []
-//     mtg.card.all({ supertypes: 'legendary', types: 'creature', colors: 'red,white' })
-//         .on('data', function (card) {
-//             console.log(card.name)
-
-//         });
-
-// })
-
-
-//This function is used to load the local bank with the information from the API cards.
+//This function is used to load the local database with the information from the API cards.
 controller.get('/dumpCards', (req, res) => {
 
     request.get({
