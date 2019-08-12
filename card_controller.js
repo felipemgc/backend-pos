@@ -28,7 +28,7 @@ controller.get('/card-name/:name', (req, res) => {
 })
 
 
-//fetch card by text (text in the description of the card) //CORRECTED
+//fetch card by text (text in the description of the card) //CORRIGIDO
 controller.get('/card-text/:name', (req, res) => {
     var data = db.fetchByCardText('magic', req.params.name);
     res.send(data);
@@ -37,25 +37,14 @@ controller.get('/card-text/:name', (req, res) => {
 
 //fetch card by name and language   //OK
 //Ex: https://backend-magic.herokuapp.com/api/get-card-name/Arc%C3%A1ngel%20Avacyn/language/spanish
-// controller.get('/get-card-name/:name/language/:language', (req, res) => {
-//     var aux;
-//     mtg.card.where({ name: req.params.name, language: req.params.language })
-//         .then(results => {
-//             console.log(results)
-//             res.send((results));
-//         })
-// })
-
-
 controller.get('/get-card-name/:name/language/:language', (req, res) => {
     var aux;
-    mtg.card.where({ name: req.params.foreignNames.name, language: req.params.foreignNames.language })
+    mtg.card.where({ name: req.params.name, language: req.params.language })
         .then(results => {
             console.log(results)
             res.send((results));
         })
 })
-
 
 
 //get the cards to set up a listview by passing the pagination (int value)   //OK
@@ -68,8 +57,7 @@ controller.get('/listview/:page', (req, res) => {
 })
 
 
-//search card by id  //OK
-//Ex:  https://backend-magic.herokuapp.com/api/search-id/130483
+//search card by id  //BROKEN
 controller.get('/search-id/:id', (req, res) => {
 
     var data = db.fetchByCardId('magic', req.params.id);
@@ -94,7 +82,7 @@ controller.get('/search-id/:id', (req, res) => {
 // })
 
 
-//This function is used to load the local database with the information from the API cards.
+//This function is used to load the local bank with the information from the API cards.
 controller.get('/dumpCards', (req, res) => {
 
     request.get({
